@@ -1,4 +1,5 @@
 {
+  "homepage": "https://itsjh1242.github.io/github_battle",
   "name": "github_battle",
   "version": "0.1.0",
   "private": true,
@@ -23,7 +24,6 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://itsjh1242.github.io/github_battle/",
   "eslintConfig": {
     "extends": [
       "react-app",
