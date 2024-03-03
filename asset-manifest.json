@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/github_battle/static/css/main.6872a3a0.css",
-    "main.js": "/github_battle/static/js/main.9ae68de3.js",
-    "static/js/453.4375863f.chunk.js": "/github_battle/static/js/453.4375863f.chunk.js",
-    "index.html": "/github_battle/index.html",
-    "main.6872a3a0.css.map": "/github_battle/static/css/main.6872a3a0.css.map",
-    "main.9ae68de3.js.map": "/github_battle/static/js/main.9ae68de3.js.map",
-    "453.4375863f.chunk.js.map": "/github_battle/static/js/453.4375863f.chunk.js.map"
+    "main.css": "https://itsjh1242.github.io/github_battle/static/css/main.6872a3a0.css",
+    "main.js": "https://itsjh1242.github.io/github_battle/static/js/main.7d0ffb37.js",
+    "static/js/453.4375863f.chunk.js": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js",
+    "index.html": "https://itsjh1242.github.io/github_battle/index.html",
+    "main.6872a3a0.css.map": "https://itsjh1242.github.io/github_battle/static/css/main.6872a3a0.css.map",
+    "main.7d0ffb37.js.map": "https://itsjh1242.github.io/github_battle/static/js/main.7d0ffb37.js.map",
+    "453.4375863f.chunk.js.map": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6872a3a0.css",
-    "static/js/main.9ae68de3.js"
+    "static/js/main.7d0ffb37.js"
   ]
 }
