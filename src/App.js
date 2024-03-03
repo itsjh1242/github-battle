@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
 import Landing from "./components/Landing";
+import Analysis from "./components/Analysis";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/analysis" element={<Analysis />} />
         </Routes>
       </BrowserRouter>
     </>

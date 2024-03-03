@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser1, updateUser2, selectUser1, selectUser2, selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
 
@@ -9,18 +10,10 @@ import * as module from "../modules/github.module.js";
 import styles from "../styles/Landing.module.scss";
 
 const Landing = () => {
-  const user1 = useSelector(selectUser1);
-  const user2 = useSelector(selectUser2);
-  const scoreUser1 = useSelector(selectScoreUser1);
-  const scoreUser2 = useSelector(selectScoreUser2);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user1Ref = useRef(null);
   const user2Ref = useRef(null);
-
-  useEffect(() => {
-    console.log(scoreUser1);
-    console.log(scoreUser2);
-  }, [scoreUser1, scoreUser2]);
 
   async function isUser() {
     try {
@@ -52,6 +45,7 @@ const Landing = () => {
           dispatch(updateUser2(result[1]));
           // 사용자 깃헙 정보 기반 점수 계산
           await module.StartAnalysis(dispatch, repoUser1, repoUser2, user1Value, user2Value);
+          navigate("/analysis");
       }
     } catch (err) {
       console.error("Error in Landing, isUser(): ", err);

@@ -1,4 +1,13 @@
-import { updateFollowers, updateFollowing, updateRepo, updateInfo, updateRecentPush, updateTotalPush } from "../features/battle/battleSlice";
+import {
+  updateAvatar,
+  updateCreatedAt,
+  updateFollowers,
+  updateFollowing,
+  updateRepo,
+  updateInfo,
+  updateRecentPush,
+  updateTotalPush,
+} from "../features/battle/battleSlice";
 
 const headers = {
   Accept: "application/vnd.github+json",
@@ -40,6 +49,10 @@ export const IsUser = async (u1, u2) => {
 
 export const StartAnalysis = async (dispatch, repoUser1, repoUser2, user1, user2) => {
   try {
+    // 프로필(avatar) 사진 등록
+    SetAvatar(dispatch, repoUser1.avatar_url, repoUser2.avatar_url);
+    // 시작일자 등록
+    EnrollCreatedAt(dispatch, repoUser1.created_at, repoUser2.created_at);
     // 점수 계산 시작
     // Followers & Following
     AnalysisFollow(dispatch, "user1", repoUser1.followers, repoUser1.following);
@@ -72,6 +85,24 @@ export const StartAnalysis = async (dispatch, repoUser1, repoUser2, user1, user2
     await AnalysisAllPushes(dispatch, user1, user2);
   } catch (err) {
     console.error("Error in StartAnalysis: ", err);
+  }
+};
+
+export const SetAvatar = (dispatch, avatarUser1, avatarUser2) => {
+  try {
+    dispatch(updateAvatar({ user: "user1", avatar: avatarUser1 }));
+    dispatch(updateAvatar({ user: "user2", avatar: avatarUser2 }));
+  } catch (err) {
+    console.error("Error in SetAvatar: ", err);
+  }
+};
+
+export const EnrollCreatedAt = (dispatch, cdUser1, cdUser2) => {
+  try {
+    dispatch(updateCreatedAt({ user: "user1", date: cdUser1 }));
+    dispatch(updateCreatedAt({ user: "user2", date: cdUser2 }));
+  } catch (err) {
+    console.error("Error in EnrollCreatedAt: ", err);
   }
 };
 

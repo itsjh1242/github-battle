@@ -43,3 +43,30 @@ p {
 .col {
   flex-direction: column;
 }
+
+@keyframes up-down {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -15%);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+.more {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  font-size: 24px;
+  color: #787878;
+
+  animation: up-down 1s infinite;
+
+  & > span {
+    color: #fff;
+  }
+}
