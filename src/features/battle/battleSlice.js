@@ -5,6 +5,7 @@ const initialState = {
   user1: {},
   user2: {},
   scoreUser1: {
+    name: "",
     avatar: "",
     created_at: "",
     followers: 0,
@@ -16,6 +17,7 @@ const initialState = {
     totalScore: 0,
   },
   scoreUser2: {
+    name: "",
     avatar: "",
     created_at: "",
     followers: 0,
@@ -34,9 +36,11 @@ export const battleSlice = createSlice({
   reducers: {
     updateUser1: (state, action) => {
       state.user1 = action.payload;
+      state.scoreUser1.name = action.payload["login"];
     },
     updateUser2: (state, action) => {
       state.user2 = action.payload;
+      state.scoreUser2.name = action.payload["login"];
     },
     updateAvatar: (state, action) => {
       if (action.payload.user === "user1") {

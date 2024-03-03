@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
 
@@ -6,6 +7,7 @@ import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSli
 import styles from "../styles/Analysis.module.scss";
 
 const Analysis = () => {
+  const navigate = useNavigate();
   // 화면에 보여질 두 사용자 점수
   const [scoreUser1, setScoreUser1] = useState(0);
   const [scoreUser2, setScoreUser2] = useState(0);
@@ -17,6 +19,11 @@ const Analysis = () => {
   let [endPointUser1, setEndPointUser1] = useState(user1["totalScore"]);
   let [endPointUser2, setEndPointUser2] = useState(user2["totalScore"]);
 
+  const moveDetail = (params) => {
+    navigate(`/analysis/${params}`);
+  };
+
+  // 숫자 카운트 애니메이션 User1
   useEffect(() => {
     let currentNumber = 0;
     const counter = setInterval(() => {
@@ -28,6 +35,7 @@ const Analysis = () => {
     }, Math.abs(Math.floor(3000 / (endPointUser1 - 0))));
   }, [endPointUser1]);
 
+  // 숫자 카운트 애니메이션 User2
   useEffect(() => {
     let currentNumber = 0;
     const counter = setInterval(() => {
@@ -46,9 +54,9 @@ const Analysis = () => {
         <div className={styles.user}>
           <div className={styles.profile}>
             <div className={styles.avatar}>
-              <img src={user1["avatar"]} alt="" />
+              <img src={user1["avatar"]} alt="" onClick={() => moveDetail(user1["name"])} />
             </div>
-            <p>name</p>
+            <p>{user1["name"]}</p>
           </div>
           <p className={styles.score}>
             <span>{scoreUser1}</span>점
@@ -58,9 +66,9 @@ const Analysis = () => {
         <div className={styles.user}>
           <div className={styles.profile}>
             <div className={styles.avatar}>
-              <img src={user2["avatar"]} alt="" />
+              <img src={user2["avatar"]} alt="" onClick={() => moveDetail(user2["name"])} />
             </div>
-            <p>name</p>
+            <p>{user2["name"]}</p>
           </div>
           <p className={styles.score}>
             <span>{scoreUser2}</span>점
