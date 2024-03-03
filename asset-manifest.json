@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://itsjh1242.github.io/github_battle/static/css/main.6872a3a0.css",
-    "main.js": "https://itsjh1242.github.io/github_battle/static/js/main.7587b556.js",
+    "main.js": "https://itsjh1242.github.io/github_battle/static/js/main.073a0f00.js",
     "static/js/453.4375863f.chunk.js": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js",
     "index.html": "https://itsjh1242.github.io/github_battle/index.html",
     "main.6872a3a0.css.map": "https://itsjh1242.github.io/github_battle/static/css/main.6872a3a0.css.map",
-    "main.7587b556.js.map": "https://itsjh1242.github.io/github_battle/static/js/main.7587b556.js.map",
+    "main.073a0f00.js.map": "https://itsjh1242.github.io/github_battle/static/js/main.073a0f00.js.map",
     "453.4375863f.chunk.js.map": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6872a3a0.css",
-    "static/js/main.7587b556.js"
+    "static/js/main.073a0f00.js"
   ]
 }
