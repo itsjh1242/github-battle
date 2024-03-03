@@ -11,7 +11,7 @@ import AnalysisDetail from "./components/AnalysisDetail";
 function App() {
   return (
     <>
-      <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
+      <BrowserRouter basename="https://itsjh1242.github.io/github_battle">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/analysis" element={<Analysis />} />
