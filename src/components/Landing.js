@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUser1, updateUser2, selectUser1, selectUser2, selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
+import { useDispatch } from "react-redux";
+import { updateUser1, updateUser2 } from "../features/battle/battleSlice";
 
 // Modules
 import * as module from "../modules/github.module.js";
@@ -54,7 +54,7 @@ const Landing = () => {
 
   return (
     <>
-      <div className="frame col">
+      <div className="frame absoulte col">
         <div className={styles.logo}>
           <img src="/images/Github.svg" alt=""></img>
         </div>

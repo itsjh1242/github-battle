@@ -1,13 +1,28 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
+
+// Components
+import CreatedAt from "./CreatedAt";
+import Follow from "./Follow";
+import Repo from "./Repo";
+import Info from "./Info";
+import RecentPush from "./RecentPush";
+import TotalPush from "./TotalPush";
+import Result from "./Result";
+import Ending from "./Ending";
 
 const AnalysisDetail = () => {
-  // 두 사용자 정보 가져오기
-  const user1 = useSelector(selectScoreUser1);
-  const user2 = useSelector(selectScoreUser2);
-
-  
+  return (
+    <>
+      <CreatedAt />
+      <Follow />
+      <Repo />
+      <Info />
+      <RecentPush />
+      <TotalPush />
+      <Result />
+      <Ending />
+    </>
+  );
 };
 
 export default AnalysisDetail;

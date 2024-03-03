@@ -161,15 +161,15 @@ export const AnalysisRecentPush = async (dispatch, user1, user2) => {
   try {
     const responseUser1 = await getRecentPush(user1);
     const responseUser2 = await getRecentPush(user2);
-    const recentPushUser1 = responseUser1[0].created_at;
-    const recentPushUser2 = responseUser2[0].created_at;
+    const recentPushUser1 = responseUser1[0].created_at.substr(0, 10).replace("-", "");
+    const recentPushUser2 = responseUser2[0].created_at.substr(0, 10).replace("-", "");
     if (recentPushUser1 > recentPushUser2) {
-      dispatch(updateRecentPush({ user: "user1", score: 10 }));
+      dispatch(updateRecentPush({ user: "user1", score: 10, date: recentPushUser1 }));
     } else if (recentPushUser1 < recentPushUser2) {
-      dispatch(updateRecentPush({ user: "user2", score: 10 }));
+      dispatch(updateRecentPush({ user: "user2", score: 10, date: recentPushUser2 }));
     } else {
-      dispatch(updateRecentPush({ user: "user1", score: 10 }));
-      dispatch(updateRecentPush({ user: "user2", score: 10 }));
+      dispatch(updateRecentPush({ user: "user1", score: 10, date: recentPushUser1 }));
+      dispatch(updateRecentPush({ user: "user2", score: 10, date: recentPushUser2 }));
     }
   } catch (err) {
     console.error("Error in AnalysisRecentPush: ", err);
@@ -206,8 +206,8 @@ export const AnalysisAllPushes = async (dispatch, user1, user2) => {
     scoreUser1 = totalPushesUser1 >= totalPushesUser2 ? 50 : 30;
     scoreUser2 = totalPushesUser1 <= totalPushesUser2 ? 50 : 30;
 
-    dispatch(updateTotalPush({ user: "user1", score: scoreUser1 }));
-    dispatch(updateTotalPush({ user: "user2", score: scoreUser2 }));
+    dispatch(updateTotalPush({ user: "user1", score: scoreUser1, push: totalPushesUser1 }));
+    dispatch(updateTotalPush({ user: "user2", score: scoreUser2, push: totalPushesUser2}));
   } catch (err) {
     console.error("Error in AnalysisAllPushes: ", err);
   }

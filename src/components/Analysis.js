@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectScoreUser1, selectScoreUser2, defineUser } from "../features/battle/battleSlice";
 
 // Style
 import styles from "../styles/Analysis.module.scss";
 
 const Analysis = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // 화면에 보여질 두 사용자 점수
   const [scoreUser1, setScoreUser1] = useState(0);
@@ -16,11 +17,17 @@ const Analysis = () => {
   const user1 = useSelector(selectScoreUser1);
   const user2 = useSelector(selectScoreUser2);
 
-  let [endPointUser1, setEndPointUser1] = useState(user1["totalScore"]);
-  let [endPointUser2, setEndPointUser2] = useState(user2["totalScore"]);
+  let [endPointUser1, setEndPointUser1] = useState(Math.floor(user1["totalScore"]));
+  let [endPointUser2, setEndPointUser2] = useState(Math.floor(user2["totalScore"]));
 
   const moveDetail = (params) => {
-    navigate(`/analysis/${params}`);
+    // 두 사용자 간의 비교를 위해 아바타 클릭 시 보여지는 나, 상대방 정의
+    if (params === "user1") {
+      dispatch(defineUser({ user: user1, opponent: user2 }));
+    } else {
+      dispatch(defineUser({ user: user2, opponent: user1 }));
+    }
+    navigate(`/analysis/detail/${params}`);
   };
 
   // 숫자 카운트 애니메이션 User1
@@ -47,14 +54,34 @@ const Analysis = () => {
     }, Math.abs(Math.floor(3000 / (endPointUser2 - 0))));
   }, [endPointUser2]);
 
+  const usePreventRefresh = () => {
+    const preventRefresh = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+      navigate("/");
+    };
+
+    useEffect(() => {
+      const handleBeforeUnload = () => {
+        window.addEventListener("beforeunload", preventRefresh);
+      };
+      handleBeforeUnload();
+
+      return () => {
+        window.removeEventListener("beforeunload", preventRefresh);
+      };
+    }, []);
+  };
+  usePreventRefresh();
+
   return (
     <>
-      <div className="frame row">
+      <div className="frame absoulte row">
         {/* User 1 */}
         <div className={styles.user}>
           <div className={styles.profile}>
             <div className={styles.avatar}>
-              <img src={user1["avatar"]} alt="" onClick={() => moveDetail(user1["name"])} />
+              <img src={user1["avatar"]} alt="" onClick={() => moveDetail("user1")} />
             </div>
             <p>{user1["name"]}</p>
           </div>
@@ -66,7 +93,7 @@ const Analysis = () => {
         <div className={styles.user}>
           <div className={styles.profile}>
             <div className={styles.avatar}>
-              <img src={user2["avatar"]} alt="" onClick={() => moveDetail(user2["name"])} />
+              <img src={user2["avatar"]} alt="" onClick={() => moveDetail("user2")} />
             </div>
             <p>{user2["name"]}</p>
           </div>
@@ -74,10 +101,10 @@ const Analysis = () => {
             <span>{scoreUser2}</span>점
           </p>
         </div>
-        <p className="more">
-          <span>분석 정보</span>를 보려면 <span>사용자</span>를 <span>클릭</span>하세요!
-        </p>
       </div>
+      <p className="more">
+        <span>분석 정보</span>를 보려면 <span>사용자</span>를 <span>클릭</span>하세요!
+      </p>
     </>
   );
 };

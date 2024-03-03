@@ -13,7 +13,9 @@ const initialState = {
     repo: 0,
     info: 0,
     recentPush: 0,
+    recentPushDate: "",
     totalPush: 0,
+    totalPushAmount: 0,
     totalScore: 0,
   },
   scoreUser2: {
@@ -25,9 +27,13 @@ const initialState = {
     repo: 0,
     info: 0,
     recentPush: 0,
+    recentPushDate: "",
     totalPush: 0,
+    totalPushAmount: 0,
     totalScore: 0,
   },
+  user: {},
+  opponent: {},
 };
 
 export const battleSlice = createSlice({
@@ -95,20 +101,28 @@ export const battleSlice = createSlice({
     updateRecentPush: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.recentPush = action.payload.score;
+        state.scoreUser1.recentPushDate = action.payload.date;
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.recentPush = action.payload.score;
+        state.scoreUser2.recentPushDate = action.payload.date;
         state.scoreUser2.totalScore += action.payload.score;
       }
     },
     updateTotalPush: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.totalPush = action.payload.score;
+        state.scoreUser1.totalPushAmount = action.payload.push;
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.totalPush = action.payload.score;
+        state.scoreUser2.totalPushAmount = action.payload.push;
         state.scoreUser2.totalScore += action.payload.score;
       }
+    },
+    defineUser: (state, action) => {
+      state.user = action.payload.user;
+      state.opponent = action.payload.opponent;
     },
   },
 });
@@ -124,6 +138,7 @@ export const {
   updateInfo,
   updateRecentPush,
   updateTotalPush,
+  defineUser,
 } = battleSlice.actions;
 
 export const selectUser1 = (state) => state.battle.user1;
@@ -131,5 +146,8 @@ export const selectUser2 = (state) => state.battle.user2;
 
 export const selectScoreUser1 = (state) => state.battle.scoreUser1;
 export const selectScoreUser2 = (state) => state.battle.scoreUser2;
+
+export const selectUser = (state) => state.battle.user;
+export const selectOpponent = (state) => state.battle.opponent;
 
 export default battleSlice.reducer;
