@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/battle/battleSlice";
 
@@ -6,10 +7,11 @@ import { selectUser } from "../features/battle/battleSlice";
 import * as Emoji from "./Emoji";
 
 const Follow = () => {
+  const navigate = useNavigate();
   // 사용자 정보 가져오기
   const user = useSelector(selectUser);
-  const followers = user.followers * 2;
-  const following = user.following * 2;
+  const followers = user.followersAmount;
+  const following = user.followingAmount;
   // 팔로우/팔로잉 개수에 따른 렌더링 분기점 State 생성
   const [condition, setCondition] = useState(true);
 
@@ -22,6 +24,12 @@ const Follow = () => {
       setCondition(null);
     }
   }, [followers, following]);
+
+  useEffect(() => {
+    if (user.name === "") {
+      navigate("/");
+    }
+  }, [user, navigate]);
   return (
     <>
       <div className="detail_frame">

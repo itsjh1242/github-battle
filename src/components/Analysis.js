@@ -74,6 +74,13 @@ const Analysis = () => {
   };
   usePreventRefresh();
 
+  // 새로고침 시 데이터 로드 에러 문제 해결
+  useEffect(() => {
+    if (user1["name"] === "" || user2["name"] === "") {
+      navigate("/");
+    }
+  }, [user1, user2, navigate]);
+
   return (
     <>
       <div className="frame absoulte row">

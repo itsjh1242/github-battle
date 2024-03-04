@@ -111,8 +111,8 @@ export const AnalysisFollow = (dispatch, type, followers, following) => {
     // Section 1: 팔로우/팔로잉, 최대 점수 각 6점씩, 1명당 0.5점
     const calc_followers = Math.min(6, followers * 0.5);
     const calc_following = Math.min(6, following * 0.5);
-    dispatch(updateFollowers({ user: type, score: calc_followers }));
-    dispatch(updateFollowing({ user: type, score: calc_following }));
+    dispatch(updateFollowers({ user: type, score: calc_followers, followers: followers }));
+    dispatch(updateFollowing({ user: type, score: calc_following, following: following }));
   } catch (err) {
     console.error("Error in AnalysisFollow: ", err);
   }
@@ -122,7 +122,7 @@ export const AnalysisRepo = (dispatch, type, repo) => {
   try {
     // Section 2: 레포지토리 개수, 최대 20점, 1개당 0.5점
     const calc_repo = Math.min(20, repo * 0.5);
-    dispatch(updateRepo({ user: type, score: calc_repo }));
+    dispatch(updateRepo({ user: type, score: calc_repo, repo: repo }));
   } catch (err) {
     console.error("Error in AnalysisRepo: ", err);
   }
@@ -161,8 +161,8 @@ export const AnalysisRecentPush = async (dispatch, user1, user2) => {
   try {
     const responseUser1 = await getRecentPush(user1);
     const responseUser2 = await getRecentPush(user2);
-    const recentPushUser1 = responseUser1[0].created_at.substr(0, 10).replace("-", "");
-    const recentPushUser2 = responseUser2[0].created_at.substr(0, 10).replace("-", "");
+    const recentPushUser1 = responseUser1[0] === undefined ? 0 : responseUser1[0].created_at.substr(0, 10).replace(/-/g, "");
+    const recentPushUser2 = responseUser2[0] === undefined ? 0 : responseUser2[0].created_at.substr(0, 10).replace(/-/g, "");
     if (recentPushUser1 > recentPushUser2) {
       dispatch(updateRecentPush({ user: "user1", score: 10, date: recentPushUser1 }));
     } else if (recentPushUser1 < recentPushUser2) {
@@ -207,7 +207,7 @@ export const AnalysisAllPushes = async (dispatch, user1, user2) => {
     scoreUser2 = totalPushesUser1 <= totalPushesUser2 ? 50 : 30;
 
     dispatch(updateTotalPush({ user: "user1", score: scoreUser1, push: totalPushesUser1 }));
-    dispatch(updateTotalPush({ user: "user2", score: scoreUser2, push: totalPushesUser2}));
+    dispatch(updateTotalPush({ user: "user2", score: scoreUser2, push: totalPushesUser2 }));
   } catch (err) {
     console.error("Error in AnalysisAllPushes: ", err);
   }

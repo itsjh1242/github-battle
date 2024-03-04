@@ -9,8 +9,11 @@ const initialState = {
     avatar: "",
     created_at: "",
     followers: 0,
+    followersAmount: 0,
     following: 0,
+    followingAmount: 0,
     repo: 0,
+    repoAmount: 0,
     info: 0,
     recentPush: 0,
     recentPushDate: "",
@@ -23,8 +26,11 @@ const initialState = {
     avatar: "",
     created_at: "",
     followers: 0,
+    followersAmount: 0,
     following: 0,
+    followingAmount: 0,
     repo: 0,
+    repoAmount: 0,
     info: 0,
     recentPush: 0,
     recentPushDate: "",
@@ -40,6 +46,46 @@ export const battleSlice = createSlice({
   name: "battle",
   initialState,
   reducers: {
+    init: (state) => {
+      state.user1 = {};
+      state.user2 = {};
+      state.scoreUser1 = {
+        name: "",
+        avatar: "",
+        created_at: "",
+        followers: 0,
+        followersAmount: 0,
+        following: 0,
+        followingAmount: 0,
+        repo: 0,
+        repoAmount: 0,
+        info: 0,
+        recentPush: 0,
+        recentPushDate: "",
+        totalPush: 0,
+        totalPushAmount: 0,
+        totalScore: 0,
+      };
+      state.scoreUser2 = {
+        name: "",
+        avatar: "",
+        created_at: "",
+        followers: 0,
+        followersAmount: 0,
+        following: 0,
+        followingAmount: 0,
+        repo: 0,
+        repoAmount: 0,
+        info: 0,
+        recentPush: 0,
+        recentPushDate: "",
+        totalPush: 0,
+        totalPushAmount: 0,
+        totalScore: 0,
+      };
+      state.user = {};
+      state.opponent = {};
+    },
     updateUser1: (state, action) => {
       state.user1 = action.payload;
       state.scoreUser1.name = action.payload["login"];
@@ -65,36 +111,44 @@ export const battleSlice = createSlice({
     updateFollowers: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.followers = action.payload.score;
+        state.scoreUser1.followersAmount = action.payload.followers;
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.followers = action.payload.score;
+        state.scoreUser2.followersAmount = action.payload.followers;
         state.scoreUser2.totalScore += action.payload.score;
       }
     },
     updateFollowing: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.following = action.payload.score;
+        state.scoreUser1.followingAmount = action.payload.following;
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.following = action.payload.score;
+        state.scoreUser2.followingAmount = action.payload.following;
         state.scoreUser2.totalScore += action.payload.score;
       }
     },
     updateRepo: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.repo = action.payload.score;
+        state.scoreUser1.repoAmount = action.payload.repo;
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.repo = action.payload.score;
+        state.scoreUser2.repoAmount = action.payload.repo;
         state.scoreUser2.totalScore += action.payload.score;
       }
     },
     updateInfo: (state, action) => {
       if (action.payload.user === "user1") {
         state.scoreUser1.info = action.payload.score;
+
         state.scoreUser1.totalScore += action.payload.score;
       } else {
         state.scoreUser2.info = action.payload.score;
+
         state.scoreUser2.totalScore += action.payload.score;
       }
     },
@@ -128,6 +182,7 @@ export const battleSlice = createSlice({
 });
 
 export const {
+  init,
   updateAvatar,
   updateUser1,
   updateUser2,

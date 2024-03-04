@@ -27,7 +27,7 @@ const Ending = () => {
           </p>
           <button className="btn_gift" onClick={() => window.open("https://toss.me/jundev", "_blank")}>
             <div className="row">
-              <img src="/images/Hot Beverage 1.svg" alt="" />
+              <img src="/github_battle/images/Hot Beverage 1.svg" alt="" />
               <p>개발자에게 커피 선물하기</p>
             </div>
           </button>

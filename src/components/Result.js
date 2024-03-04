@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 
@@ -6,6 +7,7 @@ import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 import * as Emoji from "./Emoji";
 
 const Result = () => {
+  const navigate = useNavigate();
   // 두 사용자 정보 가져오기
   const user = useSelector(selectUser);
   const opponent = useSelector(selectOpponent);
@@ -15,12 +17,16 @@ const Result = () => {
   const opponentTotalScore = Math.floor(opponent.totalScore);
 
   useEffect(() => {
-    if (userTotalScore > opponentTotalScore) {
-      setIsUserWin(true);
+    if (user.name === "" || opponent.name === "") {
+      return navigate("/");
     } else {
-      setIsUserWin(false);
+      if (userTotalScore > opponentTotalScore) {
+        setIsUserWin(true);
+      } else {
+        setIsUserWin(false);
+      }
     }
-  }, [user, opponent, userTotalScore, opponentTotalScore]);
+  }, [user, opponent, userTotalScore, opponentTotalScore, navigate]);
 
   return (
     <>

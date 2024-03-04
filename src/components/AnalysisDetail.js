@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
 
 // Components
 import CreatedAt from "./CreatedAt";
@@ -11,6 +14,27 @@ import Result from "./Result";
 import Ending from "./Ending";
 
 const AnalysisDetail = () => {
+  const navigate = useNavigate();
+  const usePreventRefresh = () => {
+    const preventRefresh = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+      navigate("/");
+    };
+
+    useEffect(() => {
+      const handleBeforeUnload = () => {
+        window.addEventListener("beforeunload", preventRefresh);
+      };
+      handleBeforeUnload();
+
+      return () => {
+        window.removeEventListener("beforeunload", preventRefresh);
+      };
+    }, []);
+  };
+  usePreventRefresh();
+
   return (
     <>
       <CreatedAt />

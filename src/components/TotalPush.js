@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 
@@ -6,6 +7,7 @@ import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 import * as Emoji from "./Emoji";
 
 const TotalPush = () => {
+  const navigate = useNavigate();
   // 두 사용자 정보 가져오기
   const user = useSelector(selectUser);
   const opponent = useSelector(selectOpponent);
@@ -15,14 +17,18 @@ const TotalPush = () => {
   const opponentTotalPushes = opponent.totalPushAmount;
 
   useEffect(() => {
-    if (userTotalPushes > opponentTotalPushes) {
-      setIsUserPushMore(true);
-    } else if (userTotalPushes < opponentTotalPushes) {
-      setIsUserPushMore(false);
+    if (user.name === "" || opponent.name === "") {
+      return navigate("/");
     } else {
-      setIsUserPushMore(null);
+      if (userTotalPushes > opponentTotalPushes) {
+        setIsUserPushMore(true);
+      } else if (userTotalPushes < opponentTotalPushes) {
+        setIsUserPushMore(false);
+      } else {
+        setIsUserPushMore(null);
+      }
     }
-  }, [user, opponent, userTotalPushes, opponentTotalPushes]);
+  }, [user, opponent, userTotalPushes, opponentTotalPushes, navigate]);
 
   return (
     <>

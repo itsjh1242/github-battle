@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 
@@ -6,23 +7,29 @@ import { selectUser, selectOpponent } from "../features/battle/battleSlice";
 import * as Emoji from "./Emoji";
 
 const CreatedAt = () => {
+  const navigate = useNavigate();
   // 두 사용자 정보 가져오기
   const user = useSelector(selectUser);
   const opponent = useSelector(selectOpponent);
   // 깃헙 생성 년월이 더 빠른 사람 상태 설정
   const [isUserEarlyJoined, setIsUserEarlyJoined] = useState(true);
-  const userCreatedAt = user.created_at.substr(0, 4);
-  const opponentCreatedAt = opponent.created_at.substr(0, 4);
+
+  const userCreatedAt = user.created_at === undefined ? "ERROR" : user.created_at.substr(0, 4);
+  const opponentCreatedAt = opponent.created_at === undefined ? "ERROR" : opponent.created_at.substr(0, 4);
 
   useEffect(() => {
-    if (userCreatedAt > opponentCreatedAt) {
-      setIsUserEarlyJoined(false);
-    } else if (userCreatedAt < opponentCreatedAt) {
-      setIsUserEarlyJoined(true);
+    if (userCreatedAt === "ERROR" || opponentCreatedAt === "ERROR") {
+      navigate("/");
     } else {
-      setIsUserEarlyJoined(null);
+      if (userCreatedAt > opponentCreatedAt) {
+        setIsUserEarlyJoined(false);
+      } else if (userCreatedAt < opponentCreatedAt) {
+        setIsUserEarlyJoined(true);
+      } else {
+        setIsUserEarlyJoined(null);
+      }
     }
-  }, [user, opponent, isUserEarlyJoined, userCreatedAt, opponentCreatedAt]);
+  }, [user, opponent, isUserEarlyJoined, userCreatedAt, opponentCreatedAt, navigate]);
 
   return (
     <>

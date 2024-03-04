@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/battle/battleSlice";
 
@@ -6,20 +7,25 @@ import { selectUser } from "../features/battle/battleSlice";
 import * as Emoji from "./Emoji";
 
 const Info = () => {
+  const navigate = useNavigate();
   // 사용자 정보 가져오기
   const user = useSelector(selectUser);
   // 사용자가 깃헙에 등록한 정보 개수에 따른 렌더링 분기점 State 생성
   const [condition, setCondition] = useState(true);
 
   useEffect(() => {
-    if (user.info === 8) {
-      setCondition(true);
-    } else if (user.info >= 4) {
-      setCondition(false);
+    if (user.name === "") {
+      return navigate("/");
     } else {
-      setCondition(null);
+      if (user.info === 8) {
+        setCondition(true);
+      } else if (user.info >= 4) {
+        setCondition(false);
+      } else {
+        setCondition(null);
+      }
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <>
