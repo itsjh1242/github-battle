@@ -1,8 +1,8 @@
 {
-  "name": "github_battle",
+  "name": "github-battle",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://itsjh1242.github.io/github-battle",
+  "homepage": "https://itsjh1242.github.io/github-battle/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
