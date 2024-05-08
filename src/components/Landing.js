@@ -75,7 +75,7 @@ const Landing = () => {
       {isLoading && <Loading user={userName} />}
       <div className="frame absoulte col">
         <div className={styles.logo}>
-          <img src="/github_battle/images/Github.svg" alt=""></img>
+          <img src="/github-battle/images/Github.svg" alt=""></img>
         </div>
         <p className={styles.title}>
           Github Battle <span>version 1.0.0</span>

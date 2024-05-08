@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectScoreUser1, selectScoreUser2 } from "../features/battle/battleSlice";
 
 // Components
 import CreatedAt from "./CreatedAt";
