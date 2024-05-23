@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://itsjh1242.github.io/github_battle/static/css/main.e92ca07e.css",
-    "main.js": "https://itsjh1242.github.io/github_battle/static/js/main.c711b356.js",
+    "main.css": "https://itsjh1242.github.io/github_battle/static/css/main.b5758c78.css",
+    "main.js": "https://itsjh1242.github.io/github_battle/static/js/main.51b68ae5.js",
     "static/js/453.4375863f.chunk.js": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js",
     "index.html": "https://itsjh1242.github.io/github_battle/index.html",
-    "main.e92ca07e.css.map": "https://itsjh1242.github.io/github_battle/static/css/main.e92ca07e.css.map",
-    "main.c711b356.js.map": "https://itsjh1242.github.io/github_battle/static/js/main.c711b356.js.map",
+    "main.b5758c78.css.map": "https://itsjh1242.github.io/github_battle/static/css/main.b5758c78.css.map",
+    "main.51b68ae5.js.map": "https://itsjh1242.github.io/github_battle/static/js/main.51b68ae5.js.map",
     "453.4375863f.chunk.js.map": "https://itsjh1242.github.io/github_battle/static/js/453.4375863f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e92ca07e.css",
-    "static/js/main.c711b356.js"
+    "static/css/main.b5758c78.css",
+    "static/js/main.51b68ae5.js"
   ]
 }
