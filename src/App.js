@@ -10,15 +10,13 @@ import AnalysisDetail from "./components/AnalysisDetail";
 
 function App() {
   return (
-    <>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/analysis" element={<Analysis />} />
-          <Route path="/analysis/detail/:user" element={<AnalysisDetail />} />
-        </Routes>
-      </HashRouter>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/analysis" element={<Analysis />} />
+        <Route path="/analysis/detail/:user" element={<AnalysisDetail />} />
+      </Routes>
+    </HashRouter>
   );
 }
 
